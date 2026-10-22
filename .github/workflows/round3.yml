@@ -1,0 +1,38 @@
+name: round3-dividend-value
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["backtest_r3.py", "fetch_fundamentals.py", "fetch_universe.py", ".github/workflows/round3.yml"]
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Prices + dividends for all SET stocks
+        run: mkdir -p results && python fetch_universe.py 2>&1 | tee results/universe_log.txt
+      - name: Quarterly fundamentals
+        continue-on-error: true
+        run: python fetch_fundamentals.py 2>&1 | tee results/fundamentals_log.txt
+      - name: Backtest round 3
+        run: python backtest_r3.py 2>&1 | tee results/backtest_r3_log.txt
+      - name: Open holdout for passers only
+        run: python holdout.py _r3 2>&1 | tee results/holdout_r3_log.txt
+      - name: Commit results
+        if: always()
+        run: |
+          git config user.name "backtest-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A results data/universe_report.txt data/fundamentals.csv || true
+          git commit -m "round 3 results $(date -u +%F)" || echo "nothing to commit"
+          git pull --rebase && git push

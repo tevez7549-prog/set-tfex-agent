@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ["*.py", ".github/workflows/backtest.yml"]
+    paths: ["backtest.py", "backtest_pit.py", "fetch_data.py", ".github/workflows/backtest.yml"]
 
 permissions:
   contents: write
