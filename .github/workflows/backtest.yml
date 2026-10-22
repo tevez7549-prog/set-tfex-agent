@@ -25,6 +25,12 @@ jobs:
         run: python backtest.py 2>&1 | tee results/backtest_log.txt
       - name: Open holdout for passers only
         run: python holdout.py 2>&1 | tee results/holdout_log.txt
+      - name: Download all SET stocks (point-in-time universe)
+        run: python fetch_universe.py 2>&1 | tee results/universe_log.txt
+      - name: Momentum backtest, point-in-time top 100
+        run: python backtest_pit.py 2>&1 | tee results/backtest_pit_log.txt
+      - name: Open holdout (pit) for passers only
+        run: python holdout.py _pit 2>&1 | tee results/holdout_pit_log.txt
       - name: Commit data and results
         if: always()
         run: |

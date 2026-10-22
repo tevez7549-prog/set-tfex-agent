@@ -213,6 +213,10 @@ def load_stocks():
 
 GRID_C = [(L, N, regime) for L in (126, 252) for N in (5, 10) for regime in (False, True)]
 
+# Universe rule for momentum. Round 1: fixed list + 20M baht/day floor.
+# Point-in-time mode (backtest_pit.py): top_k most-traded stocks at each month-end.
+MOM_UNIV = dict(top_k=None, min_val=20e6, market="SET_stocks")
+
 
 def run_momentum(px, val, setidx, L, N, regime, cost, pick=None):
     P = px.values
@@ -242,9 +246,14 @@ def run_momentum(px, val, setidx, L, N, regime, cost, pick=None):
             pending = None
         daily[i] = r
         if is_me[i] and i >= L + 21:
-            ok = (run[i] > L) & (AV[i] >= 20e6)
             score = P[i - 21] / P[i - L] - 1
-            ok &= ~np.isnan(score)
+            av = np.nan_to_num(AV[i], nan=0.0)
+            ok = (run[i] > L) & (av >= MOM_UNIV["min_val"]) & ~np.isnan(score)
+            if MOM_UNIV["top_k"]:
+                cand = np.flatnonzero(ok)
+                keep = cand[np.argsort(-av[cand])[:MOM_UNIV["top_k"]]]
+                ok = np.zeros(k, bool)
+                ok[keep] = True
             new = np.zeros(k)
             if regime and not (setc[i] > ma200[i]):
                 pass  # cash
@@ -269,7 +278,7 @@ def test_c(px, val, setidx):
         daily = run_momentum(px, val, setidx, L, N, regime, C.COST_STOCK)
         for per, (s, e) in list(PERIODS.items()) + [("holdout", (C.HOLDOUT_START, "2100-01-01"))]:
             st, bs = curve_stats(daily[s:e]), curve_stats(bench[s:e])
-            row = dict(market="SET_stocks", variant=vname, period=per, **st,
+            row = dict(market=MOM_UNIV["market"], variant=vname, period=per, **st,
                        bench_cagr=bs["cagr"], bench_sharpe=bs["sharpe"],
                        exposure=(daily[s:e] != 0).mean())
             (hold if per == "holdout" else rows).append(row)
@@ -346,19 +355,19 @@ def run_c(px, val, setidx, grids, holds, passed):
                 g.loc[m, "rand_cagr_median"] = float(np.nanmedian(rnd[p]))
                 g.loc[m, "p_value"] = float(np.mean(rnd[p] >= real))
             if beats_random_c(g[g.variant == v]):
-                passed.append(dict(market="SET_stocks", variant=v))
+                passed.append(dict(market=MOM_UNIV["market"], variant=v))
     grids.append(g)
     holds.append(h)
     print(f"SET stocks: {px.shape[1]} names, {len(GRID_C)} variants")
 
 
-def finish(grids, holds, passed):
+def finish(grids, holds, passed, tag=""):
     grid = pd.concat(grids, ignore_index=True)
-    grid.to_csv(C.RESULTS / "grid.csv", index=False, float_format="%.4f")
+    grid.to_csv(C.RESULTS / f"grid{tag}.csv", index=False, float_format="%.4f")
     # holdout is saved but sealed: holdout.py reads it only for passers
-    pd.concat(holds, ignore_index=True).to_csv(C.RESULTS / "_sealed_holdout.csv",
+    pd.concat(holds, ignore_index=True).to_csv(C.RESULTS / f"_sealed_holdout{tag}.csv",
                                                index=False, float_format="%.4f")
-    (C.RESULTS / "passed.json").write_text(json.dumps(passed, indent=1))
+    (C.RESULTS / f"passed{tag}.json").write_text(json.dumps(passed, indent=1))
     n_total = len(grid.groupby(["market", "variant"]))
     print(f"\nPassed {len(passed)} of {n_total} variants:")
     for p in passed:
