@@ -1,0 +1,4 @@
+SET50      4576  TDEX.BK
+SET        4576  TDEX.BK
+GOLD_THB   5482  
+stocks     88  

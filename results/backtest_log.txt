@@ -1,0 +1,12 @@
+S50: 14 variants, data 2008-01-02..2026-10-22
+GOLD_THB: 14 variants, data 2005-01-03..2026-10-22
+SET stocks: 88 names, 8 variants
+
+Passed 7 of 36 variants:
+  {'market': 'SET_stocks', 'variant': 'mom_L126_top10_always'}
+  {'market': 'SET_stocks', 'variant': 'mom_L126_top10_regime'}
+  {'market': 'SET_stocks', 'variant': 'mom_L126_top5_always'}
+  {'market': 'SET_stocks', 'variant': 'mom_L126_top5_regime'}
+  {'market': 'SET_stocks', 'variant': 'mom_L252_top10_always'}
+  {'market': 'SET_stocks', 'variant': 'mom_L252_top10_regime'}
+  {'market': 'SET_stocks', 'variant': 'mom_L252_top5_regime'}

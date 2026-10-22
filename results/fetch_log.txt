@@ -1,0 +1,34 @@
+HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"Quote not found for symbol: ^SET50"}}}
+$^SET50: possibly delisted; no timezone found
+
+1 Failed download:
+['^SET50']: possibly delisted; no timezone found
+HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"Quote not found for symbol: ^SET50"}}}
+$^SET50: possibly delisted; no timezone found
+
+1 Failed download:
+['^SET50']: possibly delisted; no timezone found
+$^SET50: possibly delisted; no timezone found
+
+1 Failed download:
+['^SET50']: possibly delisted; no timezone found
+$^SETI: possibly delisted; no timezone found
+
+1 Failed download:
+['^SETI']: possibly delisted; no timezone found
+$^SETI: possibly delisted; no timezone found
+
+1 Failed download:
+['^SETI']: possibly delisted; no timezone found
+$^SETI: possibly delisted; no timezone found
+
+1 Failed download:
+['^SETI']: possibly delisted; no timezone found
+SET50: using TDEX.BK (4576 rows, from 2008-01-02)
+SET: using TDEX.BK (4576 rows, from 2008-01-02)
+
+Summary:
+  SET50      4576  TDEX.BK
+  SET        4576  TDEX.BK
+  GOLD_THB   5482  
+  stocks     88  

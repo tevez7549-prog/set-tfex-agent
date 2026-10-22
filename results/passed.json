@@ -1,0 +1,30 @@
+[
+ {
+  "market": "SET_stocks",
+  "variant": "mom_L126_top10_always"
+ },
+ {
+  "market": "SET_stocks",
+  "variant": "mom_L126_top10_regime"
+ },
+ {
+  "market": "SET_stocks",
+  "variant": "mom_L126_top5_always"
+ },
+ {
+  "market": "SET_stocks",
+  "variant": "mom_L126_top5_regime"
+ },
+ {
+  "market": "SET_stocks",
+  "variant": "mom_L252_top10_always"
+ },
+ {
+  "market": "SET_stocks",
+  "variant": "mom_L252_top10_regime"
+ },
+ {
+  "market": "SET_stocks",
+  "variant": "mom_L252_top5_regime"
+ }
+]
