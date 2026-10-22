@@ -17,8 +17,8 @@ HOLDOUT_START = "2025-10-22"   # last ~12 months, opened once only
 
 # ---- Yahoo symbols ----
 # SET50 index is the proxy for S50 futures (TFEX).
-SET50_CANDIDATES = ["^SET50.BK", "^SET50"]
-SET_INDEX_CANDIDATES = ["^SET.BK", "^SETI"]
+SET50_CANDIDATES = ["^SET50.BK", "^SET50", "TDEX.BK"]  # TDEX = SET50 ETF
+SET_INDEX_CANDIDATES = ["^SET.BK", "^SETI", "^SET100.BK", "TDEX.BK"]
 GOLD_USD = "GC=F"      # COMEX gold, continuous front month
 USDTHB = "THB=X"       # baht per 1 USD
 

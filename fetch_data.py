@@ -3,13 +3,14 @@
 Run anywhere with internet (GitHub Actions now, the VPS later):
     python fetch_data.py
 """
-import sys
 import time
 
 import pandas as pd
 import yfinance as yf
 
 import config as C
+
+report_src = {}
 
 
 def download(symbol, adjust):
@@ -34,6 +35,7 @@ def first_working(candidates, name):
     for sym in candidates:
         df = download(sym, adjust=False)
         if df is not None and len(df) > 500:
+            report_src[name] = sym
             print(f"{name}: using {sym} ({len(df)} rows, from {df.index[0].date()})")
             return df
     print(f"{name}: none of {candidates} worked")
@@ -76,11 +78,9 @@ def main():
             print(f"  stock {s}: no data")
     report.append(("stocks", ok))
 
-    print("\nSummary:")
-    for name, n in report:
-        print(f"  {name:10s} {n}")
-    if any(n is None for _, n in report[:3]):
-        sys.exit(1)
+    lines = [f"{name:10s} {n}  {report_src.get(name, '')}" for name, n in report]
+    print("\nSummary:\n  " + "\n  ".join(lines))
+    (C.DATA / "fetch_report.txt").write_text("\n".join(lines) + "\n")
 
 
 if __name__ == "__main__":

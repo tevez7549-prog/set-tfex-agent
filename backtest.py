@@ -312,6 +312,9 @@ def main():
     grids, holds, passed = [], [], []
 
     for name, file, cost in [("S50", "SET50", C.COST_S50), ("GOLD_THB", "GOLD_THB", C.COST_GOLD)]:
+        if not (C.DATA / f"{file}.csv").exists():
+            print(f"{name}: no data file, skipped")
+            continue
         df = load(file)
         g, h = test_ab(name, df, cost)
         grids.append(g)
@@ -322,7 +325,16 @@ def main():
         print(f"{name}: {len(GRID_AB)} variants, data {df.index[0].date()}..{df.index[-1].date()}")
 
     px, val = load_stocks()
-    setidx = load("SET")
+    if px.shape[1] < 20 or not (C.DATA / "SET.csv").exists():
+        print("SET stocks: not enough data, skipped")
+        px = None
+    if px is not None:
+        setidx = load("SET")
+        run_c(px, val, setidx, grids, holds, passed)
+    finish(grids, holds, passed)
+
+
+def run_c(px, val, setidx, grids, holds, passed):
     g, h, bench = test_c(px, val, setidx)
     for v, gg in g.groupby("variant"):
         if passes_c(gg):
@@ -339,13 +351,15 @@ def main():
     holds.append(h)
     print(f"SET stocks: {px.shape[1]} names, {len(GRID_C)} variants")
 
+
+def finish(grids, holds, passed):
     grid = pd.concat(grids, ignore_index=True)
     grid.to_csv(C.RESULTS / "grid.csv", index=False, float_format="%.4f")
     # holdout is saved but sealed: holdout.py reads it only for passers
     pd.concat(holds, ignore_index=True).to_csv(C.RESULTS / "_sealed_holdout.csv",
                                                index=False, float_format="%.4f")
     (C.RESULTS / "passed.json").write_text(json.dumps(passed, indent=1))
-    n_total = len(GRID_AB) * 2 + len(GRID_C)
+    n_total = len(grid.groupby(["market", "variant"]))
     print(f"\nPassed {len(passed)} of {n_total} variants:")
     for p in passed:
         print(" ", p)
