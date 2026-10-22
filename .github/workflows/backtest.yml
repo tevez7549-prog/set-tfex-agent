@@ -1,0 +1,34 @@
+name: backtest
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["*.py", ".github/workflows/backtest.yml"]
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Download prices
+        run: python fetch_data.py
+      - name: Backtest grid (search + validate)
+        run: python backtest.py | tee results/backtest_log.txt
+      - name: Open holdout for passers only
+        run: python holdout.py | tee results/holdout_log.txt
+      - name: Commit data and results
+        run: |
+          git config user.name "backtest-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data results
+          git commit -m "backtest results $(date -u +%F)" || echo "nothing to commit"
+          git push
