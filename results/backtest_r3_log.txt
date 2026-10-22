@@ -1,0 +1,14 @@
+DY_top10_always fail search:0.156 validate:-0.009
+DY_top10_regime fail search:0.145 validate:-0.066
+DY_top20_always fail search:0.147 validate:0.012
+DY_top20_regime fail search:0.150 validate:-0.051
+LV_top10_always fail search:0.104 validate:0.006
+LV_top10_regime fail search:0.124 validate:-0.007
+LV_top20_always fail search:0.151 validate:-0.016
+LV_top20_regime fail search:0.150 validate:-0.020
+DYLV_top10_always fail search:0.168 validate:0.024
+DYLV_top10_regime fail search:0.178 validate:-0.021
+DYLV_top20_always fail search:0.151 validate:0.007
+DYLV_top20_regime fail search:0.157 validate:-0.039
+
+Passed 0 of 12 variants

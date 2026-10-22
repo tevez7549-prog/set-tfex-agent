@@ -1,0 +1,13 @@
+variant,period,start,cagr,maxdd,sharpe,bench_cagr,bench_sharpe,market
+DY_top10_always,holdout,2025-10-22,0.4759,-0.0879,2.4689,0.2993,1.5383,SET_r3
+DY_top10_regime,holdout,2025-10-22,0.4759,-0.0879,2.4689,0.2993,1.5383,SET_r3
+DY_top20_always,holdout,2025-10-22,0.4521,-0.0901,2.7115,0.2993,1.5383,SET_r3
+DY_top20_regime,holdout,2025-10-22,0.4521,-0.0901,2.7115,0.2993,1.5383,SET_r3
+LV_top10_always,holdout,2025-10-22,0.3284,-0.0991,1.6213,0.2993,1.5383,SET_r3
+LV_top10_regime,holdout,2025-10-22,0.3284,-0.0991,1.6213,0.2993,1.5383,SET_r3
+LV_top20_always,holdout,2025-10-22,0.2765,-0.0873,1.7699,0.2993,1.5383,SET_r3
+LV_top20_regime,holdout,2025-10-22,0.2765,-0.0873,1.7699,0.2993,1.5383,SET_r3
+DYLV_top10_always,holdout,2025-10-22,0.2865,-0.0760,2.1425,0.2993,1.5383,SET_r3
+DYLV_top10_regime,holdout,2025-10-22,0.2865,-0.0760,2.1425,0.2993,1.5383,SET_r3
+DYLV_top20_always,holdout,2025-10-22,0.3377,-0.0680,2.4950,0.2993,1.5383,SET_r3
+DYLV_top20_regime,holdout,2025-10-22,0.3377,-0.0680,2.4950,0.2993,1.5383,SET_r3
