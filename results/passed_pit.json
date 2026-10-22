@@ -1,0 +1,14 @@
+[
+ {
+  "market": "SET_pit100",
+  "variant": "mom_L126_top10_always"
+ },
+ {
+  "market": "SET_pit100",
+  "variant": "mom_L126_top10_regime"
+ },
+ {
+  "market": "SET_pit100",
+  "variant": "mom_L126_top5_regime"
+ }
+]

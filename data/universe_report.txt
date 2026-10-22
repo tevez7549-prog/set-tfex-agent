@@ -1,0 +1,9 @@
+listed today: 700
+with price history: 691
+delisted names found on Yahoo: 0 of 25: 
+range: 2005-01-04 .. 2026-10-22
+stocks with data in 2008: 376
+stocks with data in 2012: 419
+stocks with data in 2016: 508
+stocks with data in 2020: 591
+stocks with data in 2024: 687

@@ -1,0 +1,4 @@
+    market               variant  period    cagr   maxdd  sharpe  bench_cagr  bench_sharpe  exposure
+SET_pit100  mom_L126_top5_regime holdout -0.0822 -0.3106 -0.0943      0.2972        1.5283       1.0
+SET_pit100 mom_L126_top10_always holdout  0.0364 -0.2213  0.2676      0.2972        1.5283       1.0
+SET_pit100 mom_L126_top10_regime holdout  0.0364 -0.2213  0.2676      0.2972        1.5283       1.0

@@ -1,0 +1,6 @@
+SET stocks: 691 names, 8 variants
+
+Passed 3 of 8 variants:
+  {'market': 'SET_pit100', 'variant': 'mom_L126_top10_always'}
+  {'market': 'SET_pit100', 'variant': 'mom_L126_top10_regime'}
+  {'market': 'SET_pit100', 'variant': 'mom_L126_top5_regime'}

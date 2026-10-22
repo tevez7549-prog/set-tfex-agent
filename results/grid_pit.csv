@@ -1,0 +1,17 @@
+market,variant,period,cagr,maxdd,sharpe,bench_cagr,bench_sharpe,exposure,rand_cagr_median,p_value
+SET_pit100,mom_L126_top5_always,search,0.1494,-0.7622,0.5507,0.1167,0.6104,0.9984,,
+SET_pit100,mom_L126_top5_always,validate,0.0343,-0.7413,0.2736,-0.0394,-0.1240,0.9947,,
+SET_pit100,mom_L126_top5_regime,search,0.1693,-0.4839,0.6546,0.1167,0.6104,0.6425,0.1023,0.0500
+SET_pit100,mom_L126_top5_regime,validate,0.0219,-0.5256,0.2106,-0.0394,-0.1240,0.4528,-0.0771,0.0000
+SET_pit100,mom_L126_top10_always,search,0.1780,-0.6842,0.6558,0.1167,0.6104,0.9984,0.0692,0.0000
+SET_pit100,mom_L126_top10_always,validate,0.0194,-0.5609,0.2096,-0.0394,-0.1240,0.9963,-0.0935,0.0000
+SET_pit100,mom_L126_top10_regime,search,0.1798,-0.4583,0.7720,0.1167,0.6104,0.6425,0.1084,0.0100
+SET_pit100,mom_L126_top10_regime,validate,0.0084,-0.4162,0.1363,-0.0394,-0.1240,0.4528,-0.0726,0.0000
+SET_pit100,mom_L252_top5_always,search,-0.0319,-0.8347,0.1037,0.1167,0.6104,0.9984,,
+SET_pit100,mom_L252_top5_always,validate,0.0064,-0.6533,0.1942,-0.0394,-0.1240,0.9926,,
+SET_pit100,mom_L252_top5_regime,search,0.1150,-0.5586,0.5241,0.1167,0.6104,0.6425,,
+SET_pit100,mom_L252_top5_regime,validate,-0.0387,-0.5970,-0.0487,-0.0394,-0.1240,0.4517,,
+SET_pit100,mom_L252_top10_always,search,-0.0114,-0.7193,0.1219,0.1167,0.6104,0.9984,,
+SET_pit100,mom_L252_top10_always,validate,-0.0203,-0.7151,0.0674,-0.0394,-0.1240,0.9958,,
+SET_pit100,mom_L252_top10_regime,search,0.0876,-0.5365,0.4648,0.1167,0.6104,0.6425,,
+SET_pit100,mom_L252_top10_regime,validate,-0.0438,-0.6228,-0.1603,-0.0394,-0.1240,0.4528,,
