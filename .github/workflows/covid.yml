@@ -1,0 +1,33 @@
+name: covid-analysis-r4
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["analyze_covid.py", ".github/workflows/covid.yml"]
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Prices + dividends for all SET stocks
+        run: mkdir -p results && python fetch_universe.py 2>&1 | tee results/universe_log.txt
+      - name: Donchian drawdown with and without COVID
+        run: python analyze_covid.py 2>&1 | tee results/covid_r4_log.txt
+      - name: Commit results
+        if: always()
+        run: |
+          git config user.name "backtest-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A results data || true
+          git commit -m "covid analysis $(date -u +%F)" || echo "nothing to commit"
+          for i in 1 2 3; do git pull --rebase -X theirs && git push && break; sleep 5; done
