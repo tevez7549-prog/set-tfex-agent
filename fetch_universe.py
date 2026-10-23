@@ -37,7 +37,7 @@ def get_list():
 
 
 def batch_download(symbols, size=40):
-    closes, values, raws, divs = {}, {}, {}, {}
+    closes, values, raws, divs, highs, lows = {}, {}, {}, {}, {}, {}
     for i in range(0, len(symbols), size):
         chunk = [f"{s}.BK" for s in symbols[i:i + size]]
         for attempt in range(3):
@@ -61,12 +61,14 @@ def batch_download(symbols, size=40):
             closes[s] = d["Adj Close"]          # total-return price
             values[s] = d["Close"] * d["Volume"]  # baht traded
             raws[s] = d["Close"]
+            highs[s] = d["High"]
+            lows[s] = d["Low"]
             if "Dividends" in d:
                 divs[s] = d["Dividends"]
         print(f"  {min(i + size, len(symbols))}/{len(symbols)} done, kept {len(closes)}")
         time.sleep(1)
-    return (pd.DataFrame(closes), pd.DataFrame(values),
-            pd.DataFrame(raws), pd.DataFrame(divs))
+    return (pd.DataFrame(closes), pd.DataFrame(values), pd.DataFrame(raws),
+            pd.DataFrame(divs), pd.DataFrame(highs), pd.DataFrame(lows))
 
 
 def main():
@@ -74,14 +76,15 @@ def main():
     listed = get_list()
     extras = [s for s in DELISTED if s not in listed]
     print(f"listed on SET today: {len(listed)}, extra delisted names to try: {len(extras)}")
-    px, val, raw, div = batch_download(listed + extras)
+    px, val, raw, div, high, low = batch_download(listed + extras)
     def naive(df):
         df.index = pd.to_datetime(df.index)
         if df.index.tz is not None:
             df.index = df.index.tz_localize(None)
         return df
     px = naive(px).sort_index()
-    for name, df in [("close", px), ("value", val), ("rawclose", raw), ("div", div)]:
+    for name, df in [("close", px), ("value", val), ("rawclose", raw), ("div", div),
+                     ("high", high), ("low", low)]:
         naive(df).reindex(px.index).to_parquet(C.DATA / f"panel_{name}.parquet")
     found_extra = [s for s in extras if s in px.columns]
     report = [f"listed today: {len(listed)}",
