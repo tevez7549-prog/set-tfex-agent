@@ -1,0 +1,1 @@
+No variant passed search + validate; holdout stays sealed.

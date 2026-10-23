@@ -1,0 +1,13 @@
+market,variant,period,cagr,maxdd,sharpe,bench_cagr,bench_sharpe
+SET_r5,ema20_50_all,holdout,0.3387,-0.0942,1.8856,0.3189,1.6741
+SET_r5,ema20_50_div,holdout,0.4006,-0.1046,1.9143,0.3189,1.6741
+SET_r5,ema50_200_all,holdout,0.4389,-0.0967,2.2375,0.3189,1.6741
+SET_r5,ema50_200_div,holdout,0.6381,-0.0836,2.9195,0.3189,1.6741
+SET_r5,ema_stack_all,holdout,0.5227,-0.0673,2.7702,0.3189,1.6741
+SET_r5,ema_stack_div,holdout,0.5941,-0.0661,3.0505,0.3189,1.6741
+SET_r5,ema20_50_rsi_all,holdout,0.6278,-0.0953,3.1293,0.3189,1.6741
+SET_r5,ema20_50_rsi_div,holdout,0.6273,-0.0951,3.1312,0.3189,1.6741
+SET_r5,rsi_pull_all,holdout,0.0766,-0.0928,0.7626,0.3189,1.6741
+SET_r5,rsi_pull_div,holdout,0.0874,-0.0848,0.8990,0.3189,1.6741
+SET_r5,sto_pull_all,holdout,0.0357,-0.1386,0.3596,0.3189,1.6741
+SET_r5,sto_pull_div,holdout,0.0742,-0.1065,0.7080,0.3189,1.6741

@@ -1,0 +1,15 @@
+ema20_50_all           fail  trades  765  win 0.30  PF 1.70  search: +0.142 dd -0.34  validate: +0.019 dd -0.36
+ema20_50_div           fail  trades  729  win 0.31  PF 1.77  search: +0.147 dd -0.28  validate: +0.015 dd -0.39
+ema50_200_all          fail  trades  228  win 0.26  PF 3.37  search: +0.220 dd -0.43  validate: -0.016 dd -0.45
+ema50_200_div          fail  trades  226  win 0.27  PF 3.43  search: +0.220 dd -0.45  validate: -0.025 dd -0.43
+ema_stack_all          fail  trades  649  win 0.33  PF 1.86  search: +0.158 dd -0.24  validate: +0.031 dd -0.29
+ema_stack_div          fail  trades  598  win 0.34  PF 2.16  search: +0.166 dd -0.28  validate: +0.027 dd -0.23
+ema20_50_rsi_all       fail  trades  700  win 0.32  PF 1.54  search: +0.094 dd -0.29  validate: +0.014 dd -0.38
+ema20_50_rsi_div       fail  trades  653  win 0.32  PF 1.63  search: +0.090 dd -0.29  validate: +0.013 dd -0.35
+rsi_pull_all           fail  trades 1908  win 0.41  PF 0.75  search: -0.076 dd -0.61  validate: -0.084 dd -0.54
+rsi_pull_div           fail  trades 1683  win 0.41  PF 0.78  search: -0.064 dd -0.57  validate: -0.068 dd -0.47
+sto_pull_all           fail  trades 2472  win 0.48  PF 0.76  search: -0.083 dd -0.64  validate: -0.109 dd -0.62
+sto_pull_div           fail  trades 2155  win 0.49  PF 0.79  search: -0.073 dd -0.58  validate: -0.076 dd -0.50
+
+benchmark: search: +0.122  validate: -0.037
+Passed 0 of 12 variants
