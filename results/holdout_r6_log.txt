@@ -1,0 +1,2 @@
+market      variant  period   cagr   maxdd  sharpe  bench_cagr  bench_sharpe
+SET_r6 don_55_20_LS holdout 0.3338 -0.0882  1.6364      0.3189        1.6741

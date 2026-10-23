@@ -1,0 +1,7 @@
+market,variant,period,cagr,maxdd,sharpe,bench_cagr,bench_sharpe
+SET_r6,don_55_20_L,holdout,0.6462,-0.0827,2.5318,0.3189,1.6741
+SET_r6,don_55_20_LS,holdout,0.3338,-0.0882,1.6364,0.3189,1.6741
+SET_r6,don_55_20_LSR,holdout,0.6609,-0.0829,2.5774,0.3189,1.6741
+SET_r6,don_100_50_L,holdout,0.2367,-0.0986,1.3429,0.3189,1.6741
+SET_r6,don_100_50_LS,holdout,0.2802,-0.1140,1.7178,0.3189,1.6741
+SET_r6,don_100_50_LSR,holdout,0.2435,-0.0845,1.4682,0.3189,1.6741
