@@ -1,0 +1,102 @@
+SET50 Index Futures
+Closed
+S50Z26
+1,053.7
+(+0.88%)
+S50H27
+1,047.6
+(+0.83%)
+S50M27
+1,042.7
+(+0.85%)
+S50U27
+1,036.7
+(+0.81%)
+S50V26
+1,053.9
+(+0.84%)
+S50Z26
+1,053.7
+(+0.88%)
+S50H27
+1,047.6
+(+0.83%)
+S50M27
+1,042.7
+(+0.85%)
+S50U27
+1,036.7
+(+0.81%)
+S50V26
+1,053.9
+(+0.84%)
+Last Update 23 Oct 2026 03:05:16
+EN
+Products
+Market Data
+Services
+Rules and Regulations
+Education
+About TFEX
+Home
+Products
+Equity
+SET50 Index Futures
+S50Z26
+ Historical Price
+SET50 Futures
+ 
+S50Z26
+Status Closed
+Delayed 15 minutes 23 Oct 2026 As of 03:05:16
+Favorites
+S50Z26
+1,053.7
++9.2 (+0.88%)
+Vol (Contract)
+140,749
+OI (Contract)
+476,077
+ Today Price
+ Historical Price
+Historical Price Movement
+1M
+3M
+6M
+1Y
+Historical Price
+Information since first trading
+Export
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+Shows
+20
+1
+Remark
+Contract size of SET50 Index Futures was changed from 1,000 Baht per index point to 200 Baht per index point from May 6, 2014 onward.
+Price: Exclude Block Trade Transaction
+Vol (Volume): Include Block Trade Transaction
+The Stock Exchange Group uses cookies to offer you the best user experiences on the websites and applications of the Stock Exchange Group and to help enhance the effectiveness on the use. You may study additional details at Cookies Policy.
+Accept
+Thailand Futures Exchange Public Company Limited (TFEX)
+All rights reserved. The contents contained in this website are provided for informative and educational purpose only. TFEX does not make any representations and hereby disclaims with respect to this website.
+      
+SET Contact Center
++66 2009 9999
+Contact Us
+SET Group Website
+Sitemap
+© Copyright 2023 Thailand Futures Exchange Public Company Limited (TFEX)
+Terms & Conditions of Use |
+Privacy Center |
+Cookies Policy |
+Third Party Terms
