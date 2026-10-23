@@ -6,10 +6,10 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright
 
 PAGES = [
-    "https://www.tfex.co.th/en/products/equity/set50-index-futures/S50U25/historical-trading",
-    "https://www.tfex.co.th/en/products/equity/set50-index-futures/S50Z25/historical-trading",
-    "https://www.tfex.co.th/en/products/precious-metal/gold-online-futures/GOZ25/historical-trading",
+    "https://www.tfex.co.th/en/products/equity/set50-index-futures/S50Z26/historical-trading",
 ]
+# after the page, try the same API path pattern for expired series
+EXPIRED = ["S50U25", "S50H20", "S50M10", "S50Z06"]
 out = Path("results/tfex_probe"); out.mkdir(parents=True, exist_ok=True)
 log = []
 with sync_playwright() as p:
@@ -39,5 +39,16 @@ with sync_playwright() as p:
             (out / (u.rstrip("/").split("/")[-2] + ".txt")).write_text(pg.inner_text("body")[:20000])
         except Exception as e:
             print("FAIL", u, e, flush=True)
+    # guess: replay every series-specific API URL with expired symbols
+    hist = [x["url"] for x in log if "S50Z26" in x["url"] and "/api/" in x["url"]]
+    print("SERIES APIS", hist, flush=True)
+    for u in hist:
+        for sym in EXPIRED:
+            v = u.replace("S50Z26", sym)
+            r = pg.request.get(v)
+            body = r.text()
+            print("TRY", v, r.status, len(body), body[:300].replace("\n", " "), flush=True)
+            if r.status == 200 and body[:1] in "[{":
+                (out / f"exp_{sym}_{len(body)}.json").write_text(body[:400000])
     b.close()
 (out / "requests.json").write_text(json.dumps(log, indent=1))
