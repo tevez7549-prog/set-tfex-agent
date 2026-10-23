@@ -1,0 +1,31 @@
+name: probe-tfex
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["tools/probe_tfex.py", ".github/workflows/probe_tfex.yml"]
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install playwright && python -m playwright install --with-deps chromium
+      - name: Probe TFEX site
+        run: mkdir -p results && python tools/probe_tfex.py 2>&1 | tee results/tfex_probe_log.txt
+      - name: Commit results
+        if: always()
+        run: |
+          git config user.name "backtest-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A results || true
+          git commit -m "tfex probe $(date -u +%F)" || echo "nothing to commit"
+          for i in 1 2 3; do git pull --rebase -X theirs && git push && break; sleep 5; done
