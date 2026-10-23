@@ -1,0 +1,16 @@
+don_20_10_all_always             fail  trades 2220  win 0.37  PF 1.27  search: +0.097 dd -0.47  validate: -0.006 dd -0.49
+don_20_10_all_regime             fail  trades 1337  win 0.38  PF 1.38  search: +0.088 dd -0.31  validate: -0.009 dd -0.29
+don_20_10_div_always             fail  trades 2106  win 0.38  PF 1.30  search: +0.120 dd -0.24  validate: -0.025 dd -0.52
+don_20_10_div_regime             fail  trades 1289  win 0.38  PF 1.43  search: +0.088 dd -0.25  validate: -0.007 dd -0.28
+don_55_20_all_always             fail  trades 1079  win 0.39  PF 1.74  search: +0.208 dd -0.33  validate: +0.015 dd -0.32
+don_55_20_all_regime             fail  trades  687  win 0.43  PF 2.07  search: +0.177 dd -0.24  validate: +0.028 dd -0.24
+don_55_20_div_always             fail  trades 1029  win 0.40  PF 1.83  search: +0.239 dd -0.26  validate: -0.002 dd -0.30
+don_55_20_div_regime             fail  trades  664  win 0.44  PF 2.27  search: +0.197 dd -0.22  validate: +0.024 dd -0.17
+don_100_50_all_always            fail  trades  461  win 0.41  PF 2.27  search: +0.206 dd -0.28  validate: +0.021 dd -0.33
+don_100_50_all_regime            fail  trades  289  win 0.47  PF 2.75  search: +0.220 dd -0.24  validate: +0.016 dd -0.28
+don_100_50_div_always            PASS  trades  442  win 0.43  PF 2.39  search: +0.230 dd -0.21  validate: +0.030 dd -0.28
+don_100_50_div_regime            fail  trades  283  win 0.49  PF 3.27  search: +0.239 dd -0.22  validate: +0.029 dd -0.22
+
+benchmark: search: +0.122  validate: -0.037
+Passed 1 of 12 variants
+  {'market': 'SET_r4', 'variant': 'don_100_50_div_always'}

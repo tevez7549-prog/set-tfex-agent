@@ -1,0 +1,13 @@
+market,variant,period,cagr,maxdd,sharpe,bench_cagr,bench_sharpe,exposure
+SET_r4,don_20_10_all_always,holdout,0.6830,-0.0910,2.8901,0.3189,1.6741,1.0000
+SET_r4,don_20_10_all_regime,holdout,0.6784,-0.0910,2.8765,0.3189,1.6741,1.0000
+SET_r4,don_20_10_div_always,holdout,0.7407,-0.0916,3.0584,0.3189,1.6741,1.0000
+SET_r4,don_20_10_div_regime,holdout,0.7360,-0.0916,3.0450,0.3189,1.6741,1.0000
+SET_r4,don_55_20_all_always,holdout,0.6614,-0.0824,2.5891,0.3189,1.6741,1.0000
+SET_r4,don_55_20_all_regime,holdout,0.6759,-0.0825,2.6340,0.3189,1.6741,1.0000
+SET_r4,don_55_20_div_always,holdout,0.7041,-0.0903,2.6714,0.3189,1.6741,1.0000
+SET_r4,don_55_20_div_regime,holdout,0.7189,-0.0904,2.7155,0.3189,1.6741,1.0000
+SET_r4,don_100_50_all_always,holdout,0.2565,-0.0965,1.4510,0.3189,1.6741,1.0000
+SET_r4,don_100_50_all_regime,holdout,0.3269,-0.0794,1.7811,0.3189,1.6741,1.0000
+SET_r4,don_100_50_div_always,holdout,0.2067,-0.0965,1.2269,0.3189,1.6741,1.0000
+SET_r4,don_100_50_div_regime,holdout,0.2518,-0.0830,1.4988,0.3189,1.6741,1.0000

@@ -1,0 +1,2 @@
+market               variant  period   cagr   maxdd  sharpe  bench_cagr  bench_sharpe  exposure
+SET_r4 don_100_50_div_always holdout 0.2067 -0.0965  1.2269      0.3189        1.6741       1.0
