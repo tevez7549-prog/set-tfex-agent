@@ -25,3 +25,15 @@
 4. `python fetch_data.py` แล้ว `python backtest.py`
 
 โค้ดใช้ path แบบสัมพัทธ์ทั้งหมด จึงรันบน VPS ได้โดยไม่ต้องแก้
+
+## เว็บสแกนหุ้น + agent (site/)
+
+ทุกวันทำการ 17:40 น. GitHub Actions `agent-scan` รัน `agent/pipeline.py`:
+1. คัดกรอง: 60 ตัวมูลค่าซื้อขายสูงสุด + watchlist, ปันผลปกติ ≥ 5% (ตัดปันผลพิเศษ), เหนือ EMA20/50/100/200, กราฟ Regression/เส้นสำคัญ/Fibo
+2. เช็คงบ: กำไรปี/ไตรมาส, หนี้/ทุน, FCF ครอบคลุมปันผล, payout, ROE
+3. เช็คข่าว: Claude + web search (ต้องตั้ง secret `ANTHROPIC_API_KEY`)
+4. สรุป: น่าสนใจ / รอจังหวะ / ระวัง + จุดเบรก แนวรับ ตัดขาดทุน
+
+ผลอยู่ที่ `site/data/latest.json` หน้าเว็บ `site/index.html`
+ตั้งค่าใน `agent/settings.json` (เกณฑ์ปันผล, watchlist, จำนวนตัว, รุ่น Claude)
+Deploy: Cloudflare Pages → Connect to Git → repo นี้ → Build output directory `site` (ไม่มี build command)

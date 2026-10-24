@@ -369,6 +369,8 @@ def presenter(r, fin, news):
         score -= 2
     verdict = "น่าสนใจ" if score >= 2.5 else "รอจังหวะ" if score >= 0.5 else "ระวัง"
     llm = news.get("verdict")
+    if not r["pass_screen"] and verdict == "น่าสนใจ":
+        verdict = "รอจังหวะ"; why.append("ยังไม่ผ่านเกณฑ์คัดกรองครบ")
     final = verdict
     if llm in RANK and RANK[llm] > RANK[verdict]:
         final = llm; why.append(f"agent ข่าวให้ {llm}")
@@ -402,7 +404,7 @@ def main():
         nb = sum(1 for x in fin.get("flags", []) if x[0] == "bad")
         steps.append(dict(agent="เช็คงบ", ok=nb == 0, note=f"{len(fin.get('flags', []))} ประเด็น, น่ากังวล {nb}"))
         news = news_agent(s, fin, cache)
-        steps.append(dict(agent="เช็คข่าว", ok=news.get("sentiment") != "negative",
+        steps.append(dict(agent="เช็คข่าว", ok=(None if news.get("engine") != "claude" else news.get("sentiment") != "negative"),
                           note=f"{len(news.get('news', []))} ข่าว ({'Claude + web search' if news.get('engine') == 'claude' else 'Yahoo หัวข้อข่าว'})"
                                + (" แคช" if news.get("cached") else "")))
         pres = presenter(s, fin, news)
