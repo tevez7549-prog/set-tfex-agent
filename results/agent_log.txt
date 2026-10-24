@@ -1,0 +1,25 @@
+HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"Quote not found for symbol: BLISS.BK"}}}
+$BLISS.BK: possibly delisted; no timezone found
+
+1 Failed download:
+['BLISS.BK']: possibly delisted; no timezone found
+HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"Quote not found for symbol: GSTEEL.BK"}}}
+$GSTEEL.BK: possibly delisted; no timezone found
+
+1 Failed download:
+['GSTEEL.BK']: possibly delisted; no timezone found
+downloaded 688
+SCB น่าสนใจ 3.5
+PTT น่าสนใจ 4.5
+TISCO รอจังหวะ 2.0
+TU ระวัง -1.5
+TASCO ระวัง -2.0
+PTTEP รอจังหวะ 1.0
+RCL รอจังหวะ 1.0
+HMPRO รอจังหวะ 1.0
+TTB รอจังหวะ 2.0
+OR ระวัง -2.0
+OSP น่าสนใจ 2.5
+TRUE ระวัง -0.5
+screener: วิเคราะห์ 60 ตัว ผ่านเกณฑ์ 7 ตัว
+เจาะลึก 12 ตัว runtime 156 s
