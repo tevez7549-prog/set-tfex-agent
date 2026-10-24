@@ -1,0 +1,41 @@
+name: agent-scan
+on:
+  schedule:
+    - cron: "40 10 * * 1-5"   # 17:40 Bangkok, after market close
+  workflow_dispatch:
+    inputs:
+      extra:
+        description: "หุ้นเพิ่ม คั่นด้วยจุลภาค เช่น AOT,CPALL"
+        required: false
+        default: ""
+permissions:
+  contents: write
+concurrency:
+  group: agent-scan
+  cancel-in-progress: false
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt anthropic
+      - name: Run agents
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          EXTRA: ${{ github.event.inputs.extra }}
+        run: |
+          mkdir -p results
+          python -W ignore agent/pipeline.py 2>&1 | grep -v "Warning\|whatsnew\|inplace" | tee results/agent_log.txt
+          test -f site/data/latest.json
+      - name: Commit
+        if: always()
+        run: |
+          git config user.name "scan-agent"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A site/data results/agent_log.txt || true
+          git commit -m "agent scan $(TZ=Asia/Bangkok date +%F)" || echo nothing
+          for i in 1 2 3; do git pull --rebase -X theirs && git push && break; sleep 5; done

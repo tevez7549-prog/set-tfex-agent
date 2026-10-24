@@ -1,0 +1,10 @@
+{
+  "universe_top_value": 60,
+  "min_div_yield": 0.05,
+  "require_ema_stack": true,
+  "watchlist": ["PTTEP"],
+  "max_deep": 15,
+  "claude_model": "claude-sonnet-5-5",
+  "news_searches": 4,
+  "news_cache_days": 1
+}
