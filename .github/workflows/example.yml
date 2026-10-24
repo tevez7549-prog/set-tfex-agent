@@ -1,0 +1,27 @@
+name: example-trades
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["tools/example_trades.py", ".github/workflows/example.yml"]
+permissions:
+  contents: write
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: mkdir -p results && (python -W ignore tools/example_trades.py TTB; python -W ignore tools/example_trades.py PTTEP) 2>&1 | grep -v Warning | tee results/example_trades.txt
+      - name: Commit
+        if: always()
+        run: |
+          git config user.name "backtest-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A results || true
+          git commit -m "example trades" || echo nothing
+          for i in 1 2 3; do git pull --rebase -X theirs && git push && break; sleep 5; done
