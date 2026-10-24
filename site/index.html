@@ -229,6 +229,7 @@ function card(s) {
         ${tg ? `<div class="note">ราคาเป้าโบรก: ${tg}</div>` : ''}
         ${(n.events || []).length ? `<div class="note">ที่ต้องดู: ${esc(n.events.join(' · '))}</div>` : ''}
         ${(n.risks || []).length ? `<div class="note">ความเสี่ยง: ${esc(n.risks.join(' · '))}</div>` : ''}
+        <div class="note"><a href="https://www.set.or.th/th/market/product/stock/quote/${encodeURIComponent(s.sym)}/news" target="_blank" rel="noopener">ข่าวและประกาศบน SET</a> · <a href="https://www.tradingview.com/chart/?symbol=SET:${encodeURIComponent(s.sym)}" target="_blank" rel="noopener">กราฟ TradingView</a></div>
       </section>
       <section>
         <h3>เช็คงบ</h3>
