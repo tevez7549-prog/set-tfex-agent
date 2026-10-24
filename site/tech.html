@@ -108,7 +108,7 @@ input[type=search]{font:inherit;font-size:14px;color:var(--ink);background:var(-
 .up{color:var(--good)} .dn{color:var(--bad)}
 .score{font-family:var(--f-display);font-weight:600}
 tr.dt td{background:var(--bg);white-space:normal;text-align:left}
-.dt-in{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:16px;padding:8px 4px}
+.dt-in{position:sticky;left:0;max-width:calc(100vw - 56px);display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:16px;padding:8px 4px}
 @media (max-width:820px){.dt-in{grid-template-columns:1fr}}
 </style>
 
