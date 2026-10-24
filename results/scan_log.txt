@@ -1,0 +1,29 @@
+HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"Quote not found for symbol: BLISS.BK"}}}
+$BLISS.BK: possibly delisted; no timezone found
+
+1 Failed download:
+['BLISS.BK']: possibly delisted; no timezone found
+HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"Quote not found for symbol: GSTEEL.BK"}}}
+$GSTEEL.BK: possibly delisted; no timezone found
+
+1 Failed download:
+['GSTEEL.BK']: possibly delisted; no timezone found
+downloaded 688
+top50 by value, dividend 2y ok: 45
+# สแกน 2026-10-22
+
+TDEX (SET50) ปิด 10.45 vs MA200 9.80 → เหนือ MA200
+
+หุ้นกลุ่ม SET50 (มูลค่าซื้อขายสูงสุด 50 ตัว) ที่จ่ายปันผลต่อเนื่อง 2 ปี: 45 ตัว
+
+ BGRIM BREAKOUT  19.000000      True                                                              เบรก Fibo 0.236 18.78  18.216988 3.065086 0.021684
+ KBANK BREAKOUT 242.000000      True                                                             เบรก Fibo 0.236 238.46 231.308140 0.302992 0.057851
+ DELTA   BOUNCE 234.000000      True                                                ชนแนวรับ เส้นสำคัญ (5 ครั้ง) 232.00 225.040000 0.469085 0.002564
+ AMATA   BOUNCE  29.750000      True                                                          ชนแนวรับ Fibo 0.236 29.66  28.772140 0.255660 0.045378
+ PTTEP NEAR_RES 163.000000      True                                                                                    145.344800 0.056641 0.056135
+ TISCO NEAR_RES 125.500000      True                                                                                    117.708530 0.038760 0.061753
+ADVANC NEAR_RES 336.000000      True                                                                                    274.440942 0.017479 0.107440
+ CPALL NEAR_RES  44.000000     False                                                                                     40.000032 0.312502 0.037500
+ SAWAD NEAR_RES  22.700001     False                                                                                     17.309854 0.037105 0.030837
+GUNKUL      NaN   4.960000      True                                                                                      4.515893 1.328510 0.028226
+ PTTGC      NaN  52.750000      True                                                                                     44.738340 0.218432 0.020853
