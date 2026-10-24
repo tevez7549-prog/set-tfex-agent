@@ -1,9 +1,9 @@
 listed today: 699
-with price history: 690
+with price history: 689
 delisted names found on Yahoo: 0 of 25: 
 range: 2005-01-04 .. 2026-10-22
-stocks with data in 2008: 375
-stocks with data in 2012: 418
-stocks with data in 2016: 507
-stocks with data in 2020: 590
-stocks with data in 2024: 686
+stocks with data in 2008: 374
+stocks with data in 2012: 417
+stocks with data in 2016: 506
+stocks with data in 2020: 589
+stocks with data in 2024: 685

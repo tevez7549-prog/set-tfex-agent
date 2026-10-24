@@ -1,0 +1,7 @@
+market,variant,period,cagr,maxdd,sharpe,bench_cagr,bench_sharpe
+SET_r8,breakout_c1,holdout,0.5018,-0.0845,2.9037,0.3189,1.6741
+SET_r8,breakout_c2,holdout,0.4813,-0.0670,2.7700,0.3189,1.6741
+SET_r8,bounce_c1,holdout,0.4519,-0.0789,2.5962,0.3189,1.6741
+SET_r8,bounce_c2,holdout,0.5969,-0.0808,3.0773,0.3189,1.6741
+SET_r8,both_c1,holdout,0.4458,-0.0777,2.5892,0.3189,1.6741
+SET_r8,both_c2,holdout,0.5934,-0.0879,2.9603,0.3189,1.6741
