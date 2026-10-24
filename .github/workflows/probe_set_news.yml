@@ -1,0 +1,8 @@
+name: probe-set-news
+on: workflow_dispatch
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python tools/probe_set_news.py
