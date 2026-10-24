@@ -112,7 +112,10 @@ def analyse(d):
     stop = stop_base * (1 - TOL) if stop_base else None
     target = res[0] if res else None
     rr = (target[0] - px) / (px - stop) if (target and stop and px > stop) else None
+    emas = {n: float(d["Close"].ewm(span=n, adjust=False).mean().iloc[-1]) for n in (20, 50, 100, 200)}
     return dict(close=px, date=d.index[t].date(), tag=tag, signals="; ".join(status),
+                ema20=emas[20], ema50=emas[50], ema100=emas[100], ema200=emas[200],
+                ema_ok=bool(all(px > v for v in emas.values())),
                 trend_ok=trend_ok, reg=reg, support=sup[0] if sup else None,
                 resistance=target, stop=stop, rr=rr,
                 lines=[round(v, 2) for v, _ in lines],
@@ -160,7 +163,7 @@ def main():
         except Exception as e:
             print("skip", r.sym, e); continue
         a.update(sym=r.sym, dy=r.dy, tv_mb=r.tv / 1e6)
-        if a["tag"]:
+        if a["tag"] or (a["ema_ok"] and r.dy >= 0.05):
             a.update(fundamentals(r.sym))
         out.append(a)
     df = pd.DataFrame(out)
@@ -184,6 +187,12 @@ def main():
         lines.append(f"- ปันผล 12 ด. {a.dy:.1%}, P/E {a.get('pe')}, P/BV {a.get('pbv')}, ROE {a.get('roe')}, มูลค่าซื้อขาย {a.tv_mb:.0f} ลบ./วัน")
         lines.append("")
     (C.RESULTS / "scan_latest.md").write_text("\n".join(lines))
+    f = df[df.ema_ok & (df.dy >= 0.05)].copy()
+    cols = ["sym", "tag", "close", "ema20", "ema50", "ema100", "ema200", "dy", "trend_ok",
+            "signals", "support", "resistance", "stop", "rr", "pe", "pbv", "roe"]
+    f[[c for c in cols if c in f]].to_csv(C.RESULTS / "scan_ema_div5.csv", index=False)
+    print("\n=== above EMA20/50/100/200 and dividend >= 5% ===")
+    print(f[[c for c in cols if c in f]].to_string(index=False))
     print("\n".join(lines[:6]))
     print(df[["sym", "tag", "close", "trend_ok", "signals", "stop", "rr", "dy"]].to_string(index=False))
 
