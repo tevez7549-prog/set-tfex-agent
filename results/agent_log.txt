@@ -10,16 +10,19 @@ $GSTEEL.BK: possibly delisted; no timezone found
 ['GSTEEL.BK']: possibly delisted; no timezone found
 downloaded 688
 SCB น่าสนใจ 3.5
+KTB น่าสนใจ 2.5
 PTT น่าสนใจ 4.5
+KKP รอจังหวะ 1.5
 TISCO รอจังหวะ 2.0
 TU ระวัง -1.5
+KBANK น่าสนใจ 4.0
 TASCO ระวัง -2.0
 PTTEP รอจังหวะ 1.0
 RCL รอจังหวะ 1.0
+SPRC ระวัง 0.0
+BCP น่าสนใจ 3.5
 HMPRO รอจังหวะ 1.0
 TTB รอจังหวะ 2.0
-OR ระวัง -2.0
-OSP น่าสนใจ 2.5
-TRUE ระวัง -0.5
-screener: วิเคราะห์ 60 ตัว ผ่านเกณฑ์ 7 ตัว
-เจาะลึก 12 ตัว runtime 156 s
+BBL รอจังหวะ 1.5
+screener: วิเคราะห์ 60 ตัว ผ่านเกณฑ์ 11 ตัว
+เจาะลึก 15 ตัว runtime 156 s
