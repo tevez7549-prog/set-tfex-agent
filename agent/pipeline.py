@@ -47,8 +47,12 @@ def f(x, nd=4):
 
 
 # ------------------------------------------------------------------ 1. screener
-def dividend_view(d, px):
-    """Trailing-12m dividend vs the usual yearly amount -> normal yield + special flag."""
+def dividend_view(d, px, eps=None):
+    """Trailing-12m dividend vs the usual yearly amount -> normal yield + special flag.
+
+    A jump vs the last 3 years alone is not enough (banks raised payouts a lot),
+    so with EPS known a dividend counts as special only if it also exceeds earnings.
+    Normal amount is then capped at max(usual, 70% of EPS)."""
     dv = d["Dividends"] if "Dividends" in d else pd.Series(0.0, d.index)
     dv = dv[dv > 0]
     last = d.index[-1]
@@ -57,13 +61,18 @@ def dividend_view(d, px):
                      (dv.index > last - pd.DateOffset(years=k + 1))].sum()) for k in (1, 2, 3)]
     prev_pos = [p for p in prev if p > 0]
     usual = float(np.median(prev_pos)) if prev_pos else t12
-    special = bool(prev_pos and t12 > 1.4 * usual)
-    normal = min(t12, usual) if special else t12
+    jump = bool(prev_pos and t12 > 1.4 * usual)
+    if eps and eps > 0:
+        special = jump and t12 > eps
+        normal = min(t12, max(usual, 0.7 * eps)) if special else t12
+    else:
+        special = jump
+        normal = min(t12, usual) if special else t12
     years = {}
     for y, v in dv.groupby(dv.index.year).sum().items():
         if y >= last.year - 6:
             years[str(y)] = f(v, 3)
-    return dict(dps_12m=f(t12, 3), dps_usual=f(usual, 3), dy_12m=f(t12 / px),
+    return dict(dps_12m=f(t12, 3), eps=f(eps, 3), payout_12m=f(t12 / eps) if eps and eps > 0 else None, dps_usual=f(usual, 3), dy_12m=f(t12 / px),
                 dy_normal=f(normal / px), special=special, paid_2y=bool(t12 > 0 and prev[0] > 0),
                 by_year=years, last=[(str(i.date()), f(v, 3)) for i, v in dv.tail(4).items()])
 
@@ -91,6 +100,8 @@ def screener():
             print("skip", s, e); continue
         px = a["close"]
         dvv = dividend_view(d, px)
+        if dvv["special"] or (dvv["dy_12m"] or 0) >= CFG["min_div_yield"] - 0.01:
+            dvv = dividend_view(d, px, trailing_eps(s))
         c = d["Close"]
         chg = {k: f(px / c.iloc[-n] - 1) if len(c) > n else None for k, n in (("1m", 21), ("3m", 63), ("1y", 245))}
         hist = [[str(i.date()), f(v, 3)] for i, v in c.tail(260).items()]
@@ -109,6 +120,13 @@ def screener():
         rec["pass_screen"], rec["screen_notes"] = screen_rules(rec)
         out.append(rec)
     return out, market_regime(start)
+
+
+def trailing_eps(sym):
+    try:
+        return yf.Ticker(f"{sym}.BK").info.get("trailingEps")
+    except Exception:
+        return None
 
 
 def screen_rules(r):
