@@ -91,10 +91,14 @@ th{font-weight:600;color:var(--muted);font-size:12px}
   .body{grid-template-columns:1fr}
 }
 @media (prefers-reduced-motion:no-preference){.card{transition:border-color .15s}.card:hover{border-color:var(--muted)}}
+.nav{display:flex;gap:4px;border-bottom:1px solid var(--line)}
+.nav a{font-family:var(--f-display);font-size:15px;font-weight:600;text-decoration:none;color:var(--muted);padding:8px 14px;border-bottom:2px solid transparent;margin-bottom:-1px}
+.nav a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent)}
 </style>
 </head>
 <body>
 <div class="wrap">
+  <nav class="nav"><a href="index.html" aria-current="page">หุ้นปันผล + agent</a><a href="tech.html">สแกนเทคนิค</a></nav>
   <header class="top">
     <div>
       <h1>สแกนหุ้นปันผล SET</h1>

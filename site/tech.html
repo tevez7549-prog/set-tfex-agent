@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>สแกนเทคนิค SET</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Prompt:wght@500;600;700&family=Sarabun:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: control-room column — market strip, agent pipeline strip, verdict-filtered stock cards that expand into the dossier, then the screened-out table */
+:root{
+  --bg:#EEF1F4; --panel:#FFFFFF; --ink:#132033; --muted:#5B6878; --line:#D6DCE3;
+  --accent:#B0601C; --navy:#1C3352;
+  --good:#1F6B4E; --good-bg:#DDEFE6; --warn:#9A6212; --warn-bg:#F6EBD6; --bad:#9B2F22; --bad-bg:#F5DEDA;
+  --chart-line:#1C3352; --chart-fill:rgba(28,51,82,.08);
+  --f-display:'Prompt',Tahoma,sans-serif; --f-body:'Sarabun',Tahoma,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0F1621; --panel:#172131; --ink:#E6EBF1; --muted:#97A3B3; --line:#2A3748;
+  --accent:#E09A55; --navy:#9DB8DC;
+  --good:#7FCFA8; --good-bg:#173A2C; --warn:#E8BC6E; --warn-bg:#3A2E17; --bad:#F09A8C; --bad-bg:#3F1F1B;
+  --chart-line:#9DB8DC; --chart-fill:rgba(157,184,220,.10); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F1621; --panel:#172131; --ink:#E6EBF1; --muted:#97A3B3; --line:#2A3748;
+  --accent:#E09A55; --navy:#9DB8DC;
+  --good:#7FCFA8; --good-bg:#173A2C; --warn:#E8BC6E; --warn-bg:#3A2E17; --bad:#F09A8C; --bad-bg:#3F1F1B;
+  --chart-line:#9DB8DC; --chart-fill:rgba(157,184,220,.10); color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5;
+  font-variant-numeric:tabular-nums}
+.wrap{max-width:1180px;margin:0 auto;padding-block:24px 64px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;flex-direction:column;gap:20px}
+h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance}
+h1{font-size:28px;font-weight:700}
+h2{font-size:20px;font-weight:600}
+h3{font-size:15px;font-weight:600;letter-spacing:.02em}
+a{color:var(--navy)}
+.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px}
+.sub{color:var(--muted);font-size:14px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+select,button{font:inherit;font-size:14px;color:var(--ink);background:var(--panel);border:1px solid var(--line);
+  border-radius:8px;padding:6px 12px;cursor:pointer}
+button:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.chip[aria-pressed="true"]{background:var(--navy);color:var(--bg);border-color:var(--navy)}
+.strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.strip>div{background:var(--panel);padding:14px 16px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.lbl{font-size:12px;color:var(--muted);letter-spacing:.06em}
+.big{font-family:var(--f-display);font-size:22px;font-weight:600}
+.step-n{font-family:var(--f-display);color:var(--accent);font-size:13px;font-weight:600}
+.cards{display:flex;flex-direction:column;gap:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.card>summary{list-style:none;cursor:pointer;padding:16px;display:grid;
+  grid-template-columns:minmax(140px,1.2fr) minmax(110px,.8fr) minmax(200px,2fr) auto;gap:16px;align-items:center}
+.card>summary::-webkit-details-marker{display:none}
+.sym{font-family:var(--f-display);font-size:24px;font-weight:700;line-height:1.1}
+.name{font-size:13px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.px{font-size:20px;font-weight:600}
+.pill{display:inline-block;font-family:var(--f-display);font-size:13px;font-weight:600;padding:3px 12px;border-radius:999px;white-space:nowrap}
+.v-good{background:var(--good-bg);color:var(--good)} .v-warn{background:var(--warn-bg);color:var(--warn)} .v-bad{background:var(--bad-bg);color:var(--bad)}
+.tag{font-size:12px;border:1px solid var(--line);border-radius:6px;padding:1px 8px;color:var(--muted);white-space:nowrap}
+.plan{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:14px}
+.plan b{font-weight:600}
+.steps{display:flex;gap:6px;flex-wrap:wrap}
+.st{font-size:12px;padding:2px 8px;border-radius:6px;white-space:nowrap}
+.st.na{background:var(--bg);color:var(--muted)} .st.ok{background:var(--good-bg);color:var(--good)} .st.no{background:var(--warn-bg);color:var(--warn)}
+.body{border-top:1px solid var(--line);padding:16px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:20px}
+.body section{display:flex;flex-direction:column;gap:8px;min-width:0}
+.view{font-size:16px;background:var(--bg);border-radius:8px;padding:12px 14px}
+ul.flags{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px;font-size:14px}
+ul.flags li{display:flex;gap:8px;align-items:baseline}
+.dot{width:8px;height:8px;border-radius:50%;flex:none;transform:translateY(-1px)}
+.d-good{background:var(--good)} .d-warn{background:var(--warn)} .d-bad{background:var(--bad)}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:right;padding:5px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+th{font-weight:600;color:var(--muted);font-size:12px}
+.news a{text-decoration:none} .news a:hover{text-decoration:underline}
+.news li{font-size:14px}
+.chart{width:100%;height:auto;display:block}
+.chart text{fill:var(--muted);font-size:11px;font-family:var(--f-body)}
+.note{font-size:13px;color:var(--muted)}
+.empty{padding:32px;text-align:center;color:var(--muted);background:var(--panel);border-radius:12px;border:1px dashed var(--line)}
+@media (max-width:820px){
+  .card>summary{grid-template-columns:1fr auto;}
+  .card>summary .plan,.card>summary .steps{grid-column:1/-1}
+  .body{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:no-preference){.card{transition:border-color .15s}.card:hover{border-color:var(--muted)}}
+.nav{display:flex;gap:4px;border-bottom:1px solid var(--line)}
+.nav a{font-family:var(--f-display);font-size:15px;font-weight:600;text-decoration:none;color:var(--muted);padding:8px 14px;border-bottom:2px solid transparent;margin-bottom:-1px}
+.nav a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent)}
+.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+input[type=search]{font:inherit;font-size:14px;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:6px 12px;width:160px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+#tbl th{cursor:pointer;user-select:none;position:sticky;top:0;background:var(--panel)}
+#tbl th[aria-sort]::after{content:" ▾";color:var(--accent)}
+#tbl th[aria-sort="ascending"]::after{content:" ▴"}
+#tbl tbody tr.r{cursor:pointer}
+#tbl tbody tr.r:hover td{background:var(--bg)}
+#tbl td.sg{text-align:left;white-space:normal;min-width:220px}
+.sp{display:inline-block;font-size:12px;padding:1px 7px;border-radius:5px;margin:1px 2px 1px 0;background:var(--good-bg);color:var(--good);white-space:nowrap}
+.sp.n{background:var(--warn-bg);color:var(--warn)}
+.up{color:var(--good)} .dn{color:var(--bad)}
+.score{font-family:var(--f-display);font-weight:600}
+tr.dt td{background:var(--bg);white-space:normal;text-align:left}
+.dt-in{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:16px;padding:8px 4px}
+@media (max-width:820px){.dt-in{grid-template-columns:1fr}}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <nav class="nav"><a href="index.html">หุ้นปันผล + agent</a><a href="tech.html" aria-current="page">สแกนเทคนิค</a></nav>
+  <header class="top">
+    <div>
+      <h1>สแกนเทคนิค SET</h1>
+      <div class="sub" id="meta">กำลังโหลดผลสแกน…</div>
+    </div>
+  </header>
+  <div class="strip" id="sum"></div>
+  <div class="tools">
+    <input type="search" id="q" placeholder="ค้นหาหุ้น" aria-label="ค้นหาหุ้น">
+    <label for="minv" class="sub">มูลค่าซื้อขาย ≥</label>
+    <select id="minv"><option value="10">10 ลบ./วัน</option><option value="50">50 ลบ.</option><option value="200">200 ลบ.</option><option value="1000">1,000 ลบ.</option></select>
+    <label class="sub"><input type="checkbox" id="trend"> เฉพาะเทรนด์ Regression ขาขึ้น</label>
+  </div>
+  <div class="row" id="chips" role="group" aria-label="เลือกสัญญาณ (ต้องมีครบทุกข้อที่เลือก)"></div>
+  <div class="panel tbl"><table id="tbl"></table></div>
+  <p class="note">คะแนน = จำนวนสัญญาณขาขึ้น + 1 ถ้าอยู่ในเทรนด์ Regression ขาขึ้น · กดหัวตารางเพื่อเรียง กดแถวเพื่อดูกราฟ 6 เดือน ·
+    ราคาไม่ปรับปันผล ตรงกับ TradingView · สัญญาณเหล่านี้ยังไม่ผ่าน backtest ใช้คัดหุ้นมาดูต่อ ไม่ใช่คำแนะนำการลงทุน</p>
+</div>
+<script>
+const $ = s => document.querySelector(s);
+const pct = x => x == null ? '–' : (x > 0 ? '+' : '') + (x * 100).toFixed(1) + '%';
+const num = (x, d = 2) => x == null ? '–' : Number(x).toLocaleString('th-TH', {minimumFractionDigits: d, maximumFractionDigits: d});
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const cls = x => x == null ? '' : x > 0 ? 'up' : x < 0 ? 'dn' : '';
+let D, SEL = new Set(), SORT = ['score', -1], OPEN = null;
+try { SEL = new Set(JSON.parse(localStorage.getItem('tech-sel') || '[]')); } catch (e) {}
+const COLS = [['sym','หุ้น'],['close','ปิด'],['chg1d','1 วัน'],['chg5d','5 วัน'],['chg1m','1 เดือน'],['rsi','RSI'],['vol_ratio','Vol ×'],['value_mb','มูลค่า ลบ.'],['score','คะแนน'],['signals','สัญญาณ'],['support','แนวรับ'],['resistance','แนวต้าน'],['stop','ตัดขาดทุน']];
+
+fetch('data/tech.json', {cache: 'no-store'}).then(r => r.json()).then(d => { D = d; init(); })
+  .catch(() => $('#meta').textContent = 'ยังไม่มีผลสแกนเทคนิค รอ agent รันรอบถัดไป');
+
+function init() {
+  $('#meta').textContent = `ราคาปิด ${D.price_date} · รันเมื่อ ${D.generated.replace('T', ' ')} · หุ้นมูลค่าซื้อขาย ≥ ${D.min_value_mb} ลบ./วัน ${D.stocks.length} ตัว`;
+  const c = k => D.stocks.filter(s => s.signals.includes(k)).length;
+  $('#sum').innerHTML = [['breakout','bounce'], ['ema_stack'], ['high52','golden'], ['volume','macd']].map(g =>
+    `<div><span class="lbl">${g.map(k => D.labels[k]).join(' · ')}</span><span class="big">${g.map(c).join(' · ')}</span><span class="sub">ตัว</span></div>`).join('');
+  $('#chips').innerHTML = Object.entries(D.labels).map(([k, t]) => `<button class="chip" id="s-${k}" data-k="${k}" aria-pressed="${SEL.has(k)}">${t} ${c(k)}</button>`).join('');
+  $('#chips').querySelectorAll('button').forEach(b => b.onclick = () => {
+    SEL.has(b.dataset.k) ? SEL.delete(b.dataset.k) : SEL.add(b.dataset.k);
+    b.setAttribute('aria-pressed', SEL.has(b.dataset.k));
+    try { localStorage.setItem('tech-sel', JSON.stringify([...SEL])); } catch (e) {}
+    draw();
+  });
+  ['q', 'minv', 'trend'].forEach(id => $('#' + id).addEventListener('input', draw));
+  draw();
+}
+
+function val(s, k) { const v = s[k]; return Array.isArray(v) ? (k === 'signals' ? v.length : v[0]) : v; }
+
+function draw() {
+  const q = $('#q').value.trim().toUpperCase(), mv = +$('#minv').value, tr = $('#trend').checked;
+  let rows = D.stocks.filter(s => (!q || s.sym.includes(q)) && s.value_mb >= mv && (!tr || s.trend_ok) && [...SEL].every(k => s.signals.includes(k)));
+  const [k, dir] = SORT;
+  rows.sort((a, b) => { const x = val(a, k), y = val(b, k); if (x == null) return 1; if (y == null) return -1; return (x > y ? 1 : x < y ? -1 : 0) * dir; });
+  const head = '<thead><tr>' + COLS.map(([c, t]) => `<th data-k="${c}"${c === k ? ` aria-sort="${dir > 0 ? 'ascending' : 'descending'}"` : ''}>${t}</th>`).join('') + '</tr></thead>';
+  const body = rows.slice(0, 300).map(s => `<tr class="r" data-s="${s.sym}" tabindex="0">
+    <td><b>${esc(s.sym)}</b></td><td>${num(s.close)}</td><td class="${cls(s.chg1d)}">${pct(s.chg1d)}</td><td class="${cls(s.chg5d)}">${pct(s.chg5d)}</td>
+    <td class="${cls(s.chg1m)}">${pct(s.chg1m)}</td><td>${num(s.rsi, 0)}</td><td>${num(s.vol_ratio, 1)}</td><td>${num(s.value_mb, 0)}</td>
+    <td class="score">${s.score}</td><td class="sg">${s.signals.map(x => `<span class="sp${D.bull.includes(x) ? '' : ' n'}">${esc(D.labels[x])}</span>`).join('')}</td>
+    <td>${s.support ? num(s.support[0]) : '–'}</td><td>${s.resistance ? num(s.resistance[0]) : '–'}</td><td>${num(s.stop)}</td></tr>` +
+    (OPEN === s.sym ? `<tr class="dt"><td colspan="${COLS.length}">${detail(s)}</td></tr>` : '')).join('');
+  $('#tbl').innerHTML = head + '<tbody>' + (body || `<tr><td colspan="${COLS.length}" style="text-align:center;padding:24px" class="note">ไม่มีหุ้นที่มีสัญญาณครบตามที่เลือก</td></tr>`) + '</tbody>';
+  $('#tbl').querySelectorAll('th').forEach(th => th.onclick = () => { SORT = [th.dataset.k, SORT[0] === th.dataset.k ? -SORT[1] : (th.dataset.k === 'sym' ? 1 : -1)]; draw(); });
+  $('#tbl').querySelectorAll('tr.r').forEach(tr => { const f = () => { OPEN = OPEN === tr.dataset.s ? null : tr.dataset.s; draw(); }; tr.onclick = f; tr.onkeydown = e => { if (e.key === 'Enter') f(); }; });
+}
+
+function detail(s) {
+  return `<div class="dt-in"><div>${chart(s)}</div><div style="display:flex;flex-direction:column;gap:6px">
+    <div><b>${esc(s.sym)}</b> <span class="note">${esc(s.name)}</span></div>
+    <div class="note">${esc(s.detail || 'ไม่มีสัญญาณจากวิธีกราฟ')}</div>
+    <div class="plan"><span>EMA20 <b>${num(s.ema[20])}</b></span><span>EMA50 <b>${num(s.ema[50])}</b></span><span>EMA200 <b>${num(s.ema[200])}</b></span><span>ห่าง EMA200 <b>${pct(s.ema200_gap)}</b></span></div>
+    <div class="plan">${s.support ? `<span>แนวรับ <b>${num(s.support[0])}</b> ${esc(s.support[1])}</span>` : ''}${s.resistance ? `<span>แนวต้าน <b>${num(s.resistance[0])}</b> ${esc(s.resistance[1])}</span>` : ''}${s.rr ? `<span>R:R <b>${num(s.rr, 1)}</b></span>` : ''}</div>
+    <div><a href="https://www.tradingview.com/chart/?symbol=SET:${encodeURIComponent(s.sym)}" target="_blank" rel="noopener">เปิดกราฟใน TradingView</a> ·
+      <a href="https://www.set.or.th/th/market/product/stock/quote/${encodeURIComponent(s.sym)}/news" target="_blank" rel="noopener">ข่าวบน SET</a></div></div></div>`;
+}
+
+function chart(s) {
+  const ys = s.hist.filter(v => v != null); if (ys.length < 20) return '';
+  const W = 560, H = 190, L = 6, R = 70, T = 8, B = 18, lv = [];
+  if (s.resistance) lv.push([s.resistance[0], 'ต้าน', 'var(--warn)']);
+  if (s.support) lv.push([s.support[0], 'รับ', 'var(--good)']);
+  if (s.stop) lv.push([s.stop, 'ตัด', 'var(--bad)']);
+  const all = ys.concat(lv.map(x => x[0])), lo = Math.min(...all), hi = Math.max(...all), pad = (hi - lo) * .05 || 1;
+  const X = i => L + i * (W - L - R) / (ys.length - 1), Y = v => T + (hi + pad - v) / (hi - lo + 2 * pad) * (H - T - B);
+  const path = ys.map((v, i) => `${i ? 'L' : 'M'}${X(i).toFixed(1)},${Y(v).toFixed(1)}`).join('');
+  return `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="ราคาปิด 6 เดือน ${esc(s.sym)}">
+    <path d="${path}L${X(ys.length - 1)},${H - B}L${L},${H - B}Z" fill="var(--chart-fill)"/><path d="${path}" fill="none" stroke="var(--chart-line)" stroke-width="1.6"/>
+    ${lv.map(([v, t, c]) => `<line x1="${L}" x2="${W - R}" y1="${Y(v)}" y2="${Y(v)}" stroke="${c}" stroke-dasharray="4 3" stroke-width="1.2"/><text x="${W - R + 4}" y="${Y(v) + 4}">${t} ${num(v)}</text>`).join('')}
+    <circle cx="${X(ys.length - 1)}" cy="${Y(ys[ys.length - 1])}" r="3.5" fill="var(--accent)"/>
+    <text x="${L}" y="${H - 4}">${esc(s.hist_start)}</text><text x="${W - R}" y="${H - 4}" text-anchor="end">${esc(D.price_date)}</text></svg>`;
+}
+</script>
+</body>
+</html>
