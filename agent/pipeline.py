@@ -30,11 +30,13 @@ import yfinance as yf
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / 'agent'))
 import scan as S  # noqa: E402
 
 OUT = ROOT / "site" / "data"
 CFG = json.loads((ROOT / "agent" / "settings.json").read_text())
 BKK = timezone(timedelta(hours=7))
+RAW = {}
 
 
 def f(x, nd=4):
@@ -84,6 +86,7 @@ def screener():
     syms = sorted(set(meta) | set(extra))
     start = (pd.Timestamp.today() - pd.DateOffset(years=6)).strftime("%Y-%m-%d")
     data = S.download_all(syms, start)
+    RAW['data'], RAW['meta'] = data, meta
     print("downloaded", len(data))
     rows = []
     for s, d in data.items():
@@ -390,6 +393,11 @@ def main():
     cache_p = OUT / "news_cache.json"
     cache = json.loads(cache_p.read_text()) if cache_p.exists() else {}
     stocks, market = screener()
+    try:
+        import tech
+        tech.run(RAW["data"], RAW["meta"], OUT, CFG.get("tech_min_value_mb", 10))
+    except Exception:
+        traceback.print_exc()
     log = [f"screener: วิเคราะห์ {len(stocks)} ตัว ผ่านเกณฑ์ {sum(s['pass_screen'] for s in stocks)} ตัว"]
     deep = [s for s in stocks if s["pass_screen"] or s["watch"] or
             (s["tag"] in ("BREAKOUT", "BOUNCE") and (s["div"]["dy_normal"] or 0) >= CFG["min_div_yield"] - 0.01)]

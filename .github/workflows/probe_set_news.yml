@@ -1,8 +1,14 @@
 name: probe-set-news
 on: workflow_dispatch
+permissions:
+  contents: write
 jobs:
   run:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: python tools/probe_set_news.py
+      - run: mkdir -p results && python tools/probe_set_news.py | tee results/probe_set_news.txt
+      - run: |
+          git config user.name "scan-agent"; git config user.email "actions@users.noreply.github.com"
+          git add results/probe_set_news.txt; git commit -m "probe set news" || true
+          for i in 1 2 3; do git pull --rebase -X theirs && git push && break; sleep 5; done
