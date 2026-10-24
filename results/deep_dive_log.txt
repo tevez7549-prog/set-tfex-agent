@@ -1,0 +1,36 @@
+  df.drop(
+  df.rename(columns={
+  df.drop(
+  df.rename(columns={
+  df.drop(
+  df.rename(columns={
+  df.drop(
+  df.rename(columns={
+  df.drop(
+  df.rename(columns={
+  df.drop(
+  df.rename(columns={
+  df.drop(
+  df.rename(columns={
+  df.drop(
+  df.rename(columns={
+  df.drop(
+  df.rename(columns={
+  df.drop(
+  df.rename(columns={
+  df.drop(
+  df.rename(columns={
+  df.drop(
+  df.rename(columns={
+BH ok ['info', 'is', 'bs', 'cf', 'qis', 'div_by_year', 'div_last', 'px']
+PTT ok ['info', 'is', 'bs', 'cf', 'qis', 'div_by_year', 'div_last', 'px']
+KBANK ok ['info', 'is', 'bs', 'cf', 'qis', 'div_by_year', 'div_last', 'px']
+SCB ok ['info', 'is', 'bs', 'cf', 'qis', 'div_by_year', 'div_last', 'px']
+PTTEP ok ['info', 'is', 'bs', 'cf', 'qis', 'div_by_year', 'div_last', 'px']
+TISCO ok ['info', 'is', 'bs', 'cf', 'qis', 'div_by_year', 'div_last', 'px']
+KTB ok ['info', 'is', 'bs', 'cf', 'qis', 'div_by_year', 'div_last', 'px']
+RCL ok ['info', 'is', 'bs', 'cf', 'qis', 'div_by_year', 'div_last', 'px']
+TU ok ['info', 'is', 'bs', 'cf', 'qis', 'div_by_year', 'div_last', 'px']
+SPRC ok ['info', 'is', 'bs', 'cf', 'qis', 'div_by_year', 'div_last', 'px']
+CRC ok ['info', 'is', 'bs', 'cf', 'qis', 'div_by_year', 'div_last', 'px']
+KKP ok ['info', 'is', 'bs', 'cf', 'qis', 'div_by_year', 'div_last', 'px']
