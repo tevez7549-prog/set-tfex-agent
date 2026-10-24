@@ -1,0 +1,27 @@
+name: scan
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["scan.py", ".github/workflows/scan.yml"]
+permissions:
+  contents: write
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: mkdir -p results && python -W ignore scan.py 2>&1 | grep -v "Warning\|whatsnew\|inplace\|^  " | tee results/scan_log.txt
+      - name: Commit
+        if: always()
+        run: |
+          git config user.name "backtest-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A results || true
+          git commit -m "scan $(date -u +%F)" || echo nothing
+          for i in 1 2 3; do git pull --rebase -X theirs && git push && break; sleep 5; done
