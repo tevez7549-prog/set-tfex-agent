@@ -1,0 +1,7 @@
+market,variant,period,cagr,maxdd,sharpe,rand_sharpe_median,p_value
+TFEX_multi,don55_20,search,0.0140,-0.1978,0.1892,-0.1107,0.1750
+TFEX_multi,don55_20,validate,0.0320,-0.1901,0.3511,-0.1005,0.1000
+TFEX_multi,don100_50,search,0.0373,-0.2287,0.3931,-0.0367,0.0900
+TFEX_multi,don100_50,validate,0.0324,-0.2357,0.3419,0.0102,0.1900
+TFEX_multi,ema50_200,search,0.0805,-0.2353,0.6800,-0.0466,0.0100
+TFEX_multi,ema50_200,validate,-0.0360,-0.4280,-0.2439,-0.0506,0.7050

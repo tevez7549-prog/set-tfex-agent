@@ -1,0 +1,4 @@
+market,variant,period,cagr,maxdd,sharpe
+TFEX_multi,don55_20,holdout,0.0058,-0.1256,0.1077
+TFEX_multi,don100_50,holdout,0.1038,-0.1205,0.8694
+TFEX_multi,ema50_200,holdout,0.0956,-0.1661,0.7833
