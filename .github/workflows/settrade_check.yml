@@ -1,0 +1,28 @@
+name: settrade-check
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install settrade_v2
+      - name: Check sandbox (read-only)
+        env:
+          SETTRADE_APP_ID: ${{ secrets.SETTRADE_APP_ID }}
+          SETTRADE_APP_SECRET: ${{ secrets.SETTRADE_APP_SECRET }}
+          SETTRADE_BROKER_ID: ${{ secrets.SETTRADE_BROKER_ID }}
+          SETTRADE_APP_CODE: ${{ secrets.SETTRADE_APP_CODE }}
+          SETTRADE_ACCOUNT_EQ: ${{ secrets.SETTRADE_ACCOUNT_EQ }}
+          SETTRADE_ACCOUNT_DV: ${{ secrets.SETTRADE_ACCOUNT_DV }}
+        run: python tools/settrade_check.py
+      - name: Commit
+        if: always()
+        run: |
+          git config user.name "scan-agent"; git config user.email "actions@users.noreply.github.com"
+          git add results/settrade_check.json || true; git commit -m "settrade sandbox check" || true
+          for i in 1 2 3; do git pull --rebase -X theirs && git push && break; sleep 5; done
