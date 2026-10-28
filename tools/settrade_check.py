@@ -3,10 +3,22 @@ No orders are placed. Keys come from GitHub Secrets (never from files in the rep
 import json, os
 from settrade_v2 import Investor
 
-inv = Investor(app_id=os.environ["SETTRADE_APP_ID"], app_secret=os.environ["SETTRADE_APP_SECRET"],
+import traceback
+os.makedirs("results", exist_ok=True)
+present = {k: bool(os.getenv(k)) for k in ["SETTRADE_APP_ID", "SETTRADE_APP_SECRET", "SETTRADE_BROKER_ID",
+                                           "SETTRADE_APP_CODE", "SETTRADE_ACCOUNT_EQ", "SETTRADE_ACCOUNT_DV", "SETTRADE_PIN"]}
+try:
+    inv = Investor(app_id=os.environ["SETTRADE_APP_ID"], app_secret=os.environ["SETTRADE_APP_SECRET"],
                broker_id=os.getenv("SETTRADE_BROKER_ID") or "SANDBOX",
                app_code=os.getenv("SETTRADE_APP_CODE") or "SANDBOX", is_auto_queue=False)
-out = {}
+except Exception as e:
+    msg = traceback.format_exc()
+    for k in ("SETTRADE_APP_ID", "SETTRADE_APP_SECRET"):
+        if os.getenv(k):
+            msg = msg.replace(os.environ[k], "***")
+    json.dump({"secrets_present": present, "login_error": msg[-1500:]}, open("results/settrade_check.json", "w"), indent=1)
+    print(msg); raise SystemExit(1)
+out = {"secrets_present": present}
 eq_acc = os.getenv("SETTRADE_ACCOUNT_EQ")
 dv_acc = os.getenv("SETTRADE_ACCOUNT_DV")
 if eq_acc:

@@ -19,6 +19,7 @@ jobs:
           SETTRADE_APP_CODE: ${{ secrets.SETTRADE_APP_CODE }}
           SETTRADE_ACCOUNT_EQ: ${{ secrets.SETTRADE_ACCOUNT_EQ }}
           SETTRADE_ACCOUNT_DV: ${{ secrets.SETTRADE_ACCOUNT_DV }}
+          SETTRADE_PIN: ${{ secrets.SETTRADE_PIN }}
         run: python tools/settrade_check.py
       - name: Commit
         if: always()
