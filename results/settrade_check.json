@@ -1,0 +1,12 @@
+{
+ "secrets_present": {
+  "SETTRADE_APP_ID": true,
+  "SETTRADE_APP_SECRET": true,
+  "SETTRADE_BROKER_ID": true,
+  "SETTRADE_APP_CODE": true,
+  "SETTRADE_ACCOUNT_EQ": true,
+  "SETTRADE_ACCOUNT_DV": true,
+  "SETTRADE_PIN": true
+ },
+ "login_error": "ed:\n\nTraceback (most recent call last):\n  File \"/home/runner/work/set-tfex-agent/set-tfex-agent/tools/settrade_check.py\", line 11, in <module>\n    inv = Investor(app_id=os.environ[\"SETTRADE_APP_ID\"], app_secret=os.environ[\"SETTRADE_APP_SECRET\"],\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/settrade_v2/user.py\", line 73, in __init__\n    super().__init__(\n  File \"/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/settrade_v2/user.py\", line 48, in __init__\n    self._ctx = Context(\n                ^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/settrade_v2/context.py\", line 170, in __init__\n    self._check_version()\n  File \"/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/settrade_v2/context.py\", line 304, in _check_version\n    current_version, min_version = self._get_version()\n                                   ^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/settrade_v2/context.py\", line 333, in _get_version\n    version_list = response.json()\n                   ^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/requests/models.py\", line 1120, in json\n    raise RequestsJSONDecodeError(e.msg, e.doc, e.pos)\nrequests.exceptions.JSONDecodeError: Expecting value: line 1 column 1 (char 0)\n"
+}
