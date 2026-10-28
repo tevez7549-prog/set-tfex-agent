@@ -1,0 +1,12 @@
+name: vps-ping
+on: workflow_dispatch
+jobs:
+  ping:
+    runs-on: [self-hosted, vps]
+    steps:
+      - name: Hello
+        shell: powershell
+        run: |
+          whoami
+          & "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\python.exe" --version
+          git --version
