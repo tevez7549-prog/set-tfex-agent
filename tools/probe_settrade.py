@@ -1,5 +1,5 @@
 import urllib.request, os
-for u in ["https://open-api.settrade.com/sdk-open-api/sdk-version.json", "https://open-api.settrade.com/"]:
+for u in ["https://open-api-test.settrade.com/sdk-open-api/sdk-version.json", "https://open-api.settrade.com/sdk-open-api/sdk-version.json", "https://open-api.settrade.com/"]:
     try:
         r = urllib.request.urlopen(urllib.request.Request(u, headers={"User-Agent": "python-requests/2.32"}), timeout=30)
         b = r.read().decode("utf-8", "replace")
