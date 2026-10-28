@@ -1,0 +1,136 @@
+[
+ {
+  "symbol": "PTT",
+  "interval": "1d",
+  "err_['start', 'limit']": "Limit must not exceed 1000",
+  "err_['limit']": "Limit must not exceed 1000",
+  "keys": [
+   "close",
+   "high",
+   "lastSequence",
+   "low",
+   "open",
+   "time",
+   "value",
+   "volume"
+  ],
+  "params": {
+   "limit": 1000
+  },
+  "bars": 726,
+  "first": "2023-10-29T17:00:00",
+  "last": "2027-07-05T17:00:00",
+  "last_close": 46.5
+ },
+ {
+  "symbol": "KBANK",
+  "interval": "1d",
+  "err_['start', 'limit']": "Limit must not exceed 1000",
+  "err_['limit']": "Limit must not exceed 1000",
+  "keys": [
+   "close",
+   "high",
+   "lastSequence",
+   "low",
+   "open",
+   "time",
+   "value",
+   "volume"
+  ],
+  "params": {
+   "limit": 1000
+  },
+  "bars": 726,
+  "first": "2023-10-29T17:00:00",
+  "last": "2027-07-05T17:00:00",
+  "last_close": 272.0
+ },
+ {
+  "symbol": "SET50",
+  "interval": "1d",
+  "err_['start', 'limit']": "Limit must not exceed 1000",
+  "err_['limit']": "Limit must not exceed 1000",
+  "keys": [
+   "close",
+   "high",
+   "lastSequence",
+   "low",
+   "open",
+   "time",
+   "value",
+   "volume"
+  ],
+  "params": {
+   "limit": 1000
+  },
+  "bars": 726,
+  "first": "2023-10-29T17:00:00",
+  "last": "2027-07-05T17:00:00",
+  "last_close": 1108.09
+ },
+ {
+  "symbol": "SET",
+  "interval": "1d",
+  "err_['start', 'limit']": "Limit must not exceed 1000",
+  "err_['limit']": "Limit must not exceed 1000",
+  "keys": [
+   "close",
+   "high",
+   "lastSequence",
+   "low",
+   "open",
+   "time",
+   "value",
+   "volume"
+  ],
+  "params": {
+   "limit": 1000
+  },
+  "bars": 726,
+  "first": "2023-10-29T17:00:00",
+  "last": "2027-07-05T17:00:00",
+  "last_close": 1631.81
+ },
+ {
+  "symbol": "S50Z26",
+  "interval": "1d",
+  "err_['start', 'limit']": "Limit must not exceed 1000",
+  "err_['limit']": "Symbol not found [S50Z26]"
+ },
+ {
+  "symbol": "S50H27",
+  "interval": "1d",
+  "err_['start', 'limit']": "Limit must not exceed 1000",
+  "err_['limit']": "Symbol not found [S50H27]"
+ },
+ {
+  "symbol": "GOZ26",
+  "interval": "1d",
+  "err_['start', 'limit']": "Limit must not exceed 1000",
+  "err_['limit']": "Symbol not found [GOZ26]"
+ },
+ {
+  "symbol": "GF10Z26",
+  "interval": "1d",
+  "err_['start', 'limit']": "Limit must not exceed 1000",
+  "err_['limit']": "Symbol not found [GF10Z26]"
+ },
+ {
+  "symbol": "USDZ26",
+  "interval": "1d",
+  "err_['start', 'limit']": "Limit must not exceed 1000",
+  "err_['limit']": "Symbol not found [USDZ26]"
+ },
+ {
+  "symbol": "PTT",
+  "interval": "1h",
+  "err_['start', 'limit']": "Method parameter 'interval': Failed to convert value of type 'java.lang.String' to required type 'com.settrade.techchart.dto.Interval'; Failed to convert from type [java.lang.String] to type [@io.swag",
+  "err_['limit']": "Method parameter 'interval': Failed to convert value of type 'java.lang.String' to required type 'com.settrade.techchart.dto.Interval'; Failed to convert from type [java.lang.String] to type [@io.swag"
+ },
+ {
+  "symbol": "S50Z26",
+  "interval": "1h",
+  "err_['start', 'limit']": "Method parameter 'interval': Failed to convert value of type 'java.lang.String' to required type 'com.settrade.techchart.dto.Interval'; Failed to convert from type [java.lang.String] to type [@io.swag",
+  "err_['limit']": "Method parameter 'interval': Failed to convert value of type 'java.lang.String' to required type 'com.settrade.techchart.dto.Interval'; Failed to convert from type [java.lang.String] to type [@io.swag"
+ }
+]
