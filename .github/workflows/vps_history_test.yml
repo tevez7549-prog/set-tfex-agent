@@ -6,7 +6,14 @@ jobs:
   fetch:
     runs-on: [self-hosted, vps]
     steps:
-      - uses: actions/checkout@v4
+      - name: Get script (no git on VPS)
+        shell: powershell
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          New-Item -ItemType Directory -Force -Path vps | Out-Null
+          $h = @{ Authorization = "Bearer $env:GH_TOKEN"; Accept = "application/vnd.github.raw" }
+          Invoke-WebRequest -UseBasicParsing -Headers $h -OutFile vps/history_test.py "https://api.github.com/repos/${{ github.repository }}/contents/vps/history_test.py?ref=${{ github.sha }}"
       - name: Pull candles from Settrade sandbox
         shell: powershell
         env:
