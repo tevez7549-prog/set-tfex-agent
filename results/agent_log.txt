@@ -1,3 +1,6 @@
+
+1 Failed download:
+['AMC.BK']: OperationalError('database is locked')
 HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"Quote not found for symbol: BLISS.BK"}}}
 $BLISS.BK: possibly delisted; no timezone found
 
@@ -8,21 +11,22 @@ $GSTEEL.BK: possibly delisted; no timezone found
 
 1 Failed download:
 ['GSTEEL.BK']: possibly delisted; no timezone found
-downloaded 690
-tech: 169 stocks, with breakout/bounce 56
+downloaded 689
+tech: 169 stocks, with breakout/bounce 83
 SCB น่าสนใจ 2.5
 KBANK น่าสนใจ 3.0
 TU ระวัง -1.5
-PTT รอจังหวะ 2.5
-TIDLOR รอจังหวะ 2.5
-TISCO รอจังหวะ 2.0
-PTTEP รอจังหวะ 2.0
+SPCG ระวัง -4.0
+TIDLOR รอจังหวะ 1.5
+PTTEP ระวัง -1.0
 HMPRO รอจังหวะ 1.0
-SPRC รอจังหวะ 2.0
 TTB รอจังหวะ 2.0
-BBL รอจังหวะ 1.5
+RCL รอจังหวะ 2.0
+GULF ระวัง -0.5
+AMATA รอจังหวะ 3.5
 KTC รอจังหวะ 2.5
 TCAP รอจังหวะ 2.5
-OSP รอจังหวะ 2.5
+WHA ระวัง -0.5
+RATCH รอจังหวะ 0.5
 screener: วิเคราะห์ 60 ตัว ผ่านเกณฑ์ 3 ตัว
-เจาะลึก 14 ตัว runtime 96 s
+เจาะลึก 15 ตัว runtime 101 s
