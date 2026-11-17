@@ -9,20 +9,20 @@ $GSTEEL.BK: possibly delisted; no timezone found
 1 Failed download:
 ['GSTEEL.BK']: possibly delisted; no timezone found
 downloaded 690
-tech: 159 stocks, with breakout/bounce 55
+tech: 162 stocks, with breakout/bounce 61
 SCB น่าสนใจ 2.5
 KKP รอจังหวะ 1.5
-KTB รอจังหวะ 2.0
-TISCO น่าสนใจ 4.0
+KTB รอจังหวะ 1.0
+TISCO น่าสนใจ 3.5
 TU ระวัง -1.5
 KBANK น่าสนใจ 3.0
+PTT รอจังหวะ 2.5
 PTTEP รอจังหวะ 1.0
 RCL รอจังหวะ 2.5
 HMPRO รอจังหวะ 1.0
 SPRC รอจังหวะ 1.0
-TTB รอจังหวะ 1.5
-BBL ระวัง 0.0
 STA ระวัง -1.0
 TCAP รอจังหวะ 2.5
+RATCH รอจังหวะ 2.0
 screener: วิเคราะห์ 60 ตัว ผ่านเกณฑ์ 6 ตัว
-เจาะลึก 14 ตัว runtime 81 s
+เจาะลึก 14 ตัว runtime 94 s
